@@ -53,7 +53,7 @@
     <% } %>
 </table>
 
-<a href="logout" class="btn btn-secondary">Logout</a>
+<a href="login_doctor.jsp" class="btn btn-secondary">Logout</a>
 </body>
 </html>
 

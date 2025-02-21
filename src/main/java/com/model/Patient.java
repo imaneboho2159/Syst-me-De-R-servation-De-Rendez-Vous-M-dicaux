@@ -18,6 +18,11 @@ public class Patient {
     public Patient() {
     }
 
+    public Patient(String name, String email, String password) {
+
+
+    }
+
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

@@ -22,6 +22,13 @@ public class Appointment {
     public Appointment() {
     }
 
+    public Appointment(int doctorId, int patientId, String date, String time) {
+        this.doctorId = doctorId;
+        this.patientId = patientId;
+        this.dateTime = LocalDateTime.parse(date);
+        this.reason = time;
+    }
+
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

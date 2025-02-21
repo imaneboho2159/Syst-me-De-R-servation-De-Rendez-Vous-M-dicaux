@@ -20,6 +20,17 @@ public class Doctor {
     public Doctor() {
     }
 
+
+
+    public Doctor(int id, String name, String specialization, String email, String phone) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.specialization = specialization;
+
+    }
+
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
