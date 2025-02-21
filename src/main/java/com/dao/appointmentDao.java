@@ -7,37 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class appointmentDao {
-    private static Connection connection;
+    private static Connection connection; // Fix: Use instance-level connection
 
     public appointmentDao(Connection connection) {
-        appointmentDao.connection = connection;
+        this.connection = connection;
     }
     public appointmentDao() {
-    }
-
-    // Retrieve all appointments for a specific doctor
-    public static List<Appointment> getAppointmentsForDoctor(int doctorId) {
-        List<Appointment> appointments = new ArrayList<>();
-        String query = "SELECT * FROM appointment WHERE doctor_id = ?";
-
-        try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setInt(1, doctorId);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    appointments.add(new Appointment(
-                            rs.getInt("id"),
-                            rs.getInt("patient_id"),
-                            rs.getInt("doctor_id"),
-                            rs.getTimestamp("date_time").toLocalDateTime(),
-                            rs.getString("reason"),
-                            rs.getString("status")
-                    ));
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // Consider logging this
-        }
-        return appointments;
     }
 
     // Retrieve all appointments for a specific patient
@@ -118,5 +93,7 @@ public class appointmentDao {
     }
 
 }
+
+
 
 

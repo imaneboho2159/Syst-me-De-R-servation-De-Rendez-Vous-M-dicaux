@@ -1,4 +1,4 @@
-<%@ page import="java.util.List, com.model.Appointment, com.model.Patient, com.model.Doctor" %>
+<%@ page import="java.util.List, java.util.ArrayList, com.model.Appointment, com.model.Patient, com.model.Doctor" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -45,37 +45,36 @@
         <th>Action</th>
     </tr>
     <%
-        List<Appointment> appointments = (List<Appointment>) request.getAttribute("appointments");
-        List<Doctor> doctors = (List<Doctor>) request.getAttribute("doctors");
+        List<Appointment> appointmentList = (List<Appointment>) session.getAttribute("appointments");
+        if (appointmentList == null) {
+            appointmentList = new ArrayList<>();
+        }
 
-        if (appointments != null) {
-            for (Appointment app : appointments) {
-                String doctorName = "Unknown";
-                if (doctors != null) {
-                    for (Doctor doc : doctors) {
-                        if (doc.getId() == app.getDoctorId()) {
-                            doctorName = doc.getName();
-                            break;
-                        }
-                    }
-                }
+        if (!appointmentList.isEmpty()) {
+            for (Appointment appointment : appointmentList) {
     %>
     <tr>
-        <td><%= app.getDateTime() %></td>
-        <td><%= doctorName %></td>
-        <td><%= app.getReason() %></td>
-        <td><%= app.getStatus() %></td>
+        <td><%= appointment.getDateTime() %></td>
+        <td>Dr. <%= appointment.getDoctorId() %></td> <!-- You need to get doctor's name separately -->
+        <td><%= appointment.getReason() %></td>
+        <td><%= appointment.getStatus() %></td>
         <td>
             <form action="cancelAppointment" method="post">
-                <input type="hidden" name="appointmentId" value="<%= app.getId() %>">
+                <input type="hidden" name="appointmentId" value="<%= appointment.getId() %>">
                 <button type="submit" class="btn btn-danger">Cancel</button>
             </form>
         </td>
     </tr>
-    <% } } %>
+    <%
+        }
+    } else {
+    %>
+    <tr>
+        <td colspan="5" class="text-center">No Appointments Found</td>
+    </tr>
+    <% } %>
 </table>
 
-<a href="login_patient.jsp" class="btn btn-secondary">Logout</a>
+<a href="logoutServlet" class="btn btn-secondary">Logout</a>
 </body>
 </html>
-
