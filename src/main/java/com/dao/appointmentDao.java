@@ -7,14 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class appointmentDao {
-    private Connection connection;
+    private static Connection connection;
 
     public appointmentDao(Connection connection) {
-        this.connection = connection;
+        appointmentDao.connection = connection;
+    }
+    public appointmentDao() {
     }
 
     // Retrieve all appointments for a specific doctor
-    public List<Appointment> getAppointmentsForDoctor(int doctorId) {
+    public static List<Appointment> getAppointmentsForDoctor(int doctorId) {
         List<Appointment> appointments = new ArrayList<>();
         String query = "SELECT * FROM appointment WHERE doctor_id = ?";
 
@@ -92,7 +94,7 @@ public class appointmentDao {
         }
     }
     // Retrieve all appointments
-    public List<Appointment> getAllAppointments() {
+    public static List<Appointment> getAllAppointments() {
         List<Appointment> appointments = new ArrayList<>();
         String query = "SELECT * FROM appointment";
 

@@ -78,7 +78,7 @@ public class AppointmentServlet extends HttpServlet {
 
         if (patient != null) {
             try {
-                List<Appointment> appointments = appointmentDao.getAppointmentsForPatient(patient.getId());
+                List<Appointment> appointments = appointmentDao.getAllAppointments();
                 session.setAttribute("appointments", appointments);
                 request.getRequestDispatcher("AppointementPatient.jsp").forward(request, response);
             } catch (Exception e) {

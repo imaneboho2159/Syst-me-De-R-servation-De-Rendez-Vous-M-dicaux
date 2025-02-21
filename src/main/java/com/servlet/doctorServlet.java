@@ -1,6 +1,8 @@
 package com.servlet;
 
 import com.dao.doctorDao;
+import com.model.Appointment;
+import com.dao.appointmentDao;
 import com.model.Doctor;
 
 import javax.servlet.ServletException;
@@ -85,8 +87,17 @@ public class doctorServlet extends HttpServlet {
     // Fetch all doctors and display them
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Doctor> doctors = doctorDao.getAllDoctors();
-        request.setAttribute("doctors", doctors);
-        request.getRequestDispatcher("AllDoctors.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        Doctor doctor = (Doctor) session.getAttribute("doctor");
+
+        if (doctor == null) {
+            response.sendRedirect("login_doctor.jsp");
+            return;
+        }
+
+        List<Appointment> appointments = appointmentDao.getAllAppointments();
+        request.setAttribute("appointments", appointments);
+        request.getRequestDispatcher("AppointementDoctor.jsp").forward(request, response);
     }
+
 }

@@ -1,7 +1,5 @@
 package com.dao;
 
-
-
 import com.model.Doctor;
 import java.sql.*;
 import java.util.ArrayList;
@@ -90,6 +88,7 @@ public class doctorDao {
                         rs.getString("phone")
                 );
                 doctors.add(doctor);
+                return  doctors;
             }
         } catch (SQLException e) {
             e.printStackTrace(); // Consider logging this

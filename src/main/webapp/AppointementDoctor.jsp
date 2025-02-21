@@ -13,7 +13,7 @@
     Doctor doctor = (Doctor) session.getAttribute("doctor");
     if (doctor == null) {
         response.sendRedirect("login_doctor.jsp");
-        return; // Stop further execution
+        return;
     }
 %>
 
@@ -56,6 +56,3 @@
 <a href="login_doctor.jsp" class="btn btn-secondary">Logout</a>
 </body>
 </html>
-
-
-
